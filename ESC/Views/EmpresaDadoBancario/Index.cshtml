@@ -1,0 +1,65 @@
+﻿@model IEnumerable<ESC.Models.EmpresaDadoBancario>
+
+@{
+    ViewBag.Title = "Cadastro de Empresa";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- INICIO ########## CABEÇALHO DA PÁGINA ########## -->
+<div class="br-pagetitle">
+    <i class="icon ion-ios-card-outline"></i>
+    <div>
+        <h4>Dados Bancários da Empresa</h4>
+        <p class="mg-b-0">Relação de Contas Bancárias Cadastradas.</p>
+
+    </div>
+</div>
+<!-- FIM ########## CABEÇALHO DA PÁGINA ########## -->
+<!-- INICIO ########## CORPO DA PÁGINA ########## -->
+<div class="br-pagebody">
+    <div class="br-section-wrapper">
+        <div class="table-wrapper">
+            <table class="table display responsive nowrap">
+                <thead>
+                    <tr>
+                        <th width="15%">Núm Banco</th>
+                        <th>Banco</th>
+                        <th>Agência</th>
+                        <th>Conta</th>
+                        <th>Ativa</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model != null)
+                    {
+                        foreach (var item in Model)
+                        {
+                            <tr class="gradeX">
+                                <td>
+                                    @Html.ActionLink(item.NumBanco.ToString(), "Editar", new { idEmpresaDadoBancario = item.IdDadoBancario })
+                                </td>
+                                <td>
+                                    @Html.ActionLink(item.NomeBanco, "Editar", new { idEmpresaDadoBancario = item.IdDadoBancario })
+                                </td>
+                                <td>
+                                    @Html.ActionLink(item.NumAgencia, "Editar", new { idEmpresaDadoBancario = item.IdDadoBancario })
+                                </td>
+                                <td>
+                                    @Html.ActionLink(item.NumConta, "Editar", new { idEmpresaDadoBancario = item.IdDadoBancario })
+                                </td>
+                                <td>
+                                    @Html.ActionLink(item.Ativo.ToString(), "Editar", new { idEmpresaDadoBancario = item.IdDadoBancario })
+                                </td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div><!-- table-wrapper -->
+
+        <span>
+            @Html.ActionLink("Novo", "Criar", "~/EmpresaDadoBancario", new { @class = "btn btn-info pd-y-13 pd-x-20 bd-0 mg-md-l-10 mg-t-10 mg-md-t-0 tx-uppercase tx-11 tx-spacing-2" })
+        </span><!-- form-layout-footer -->
+
+    </div><!-- br-section-wrapper -->
+</div><!-- br-pagebody -->

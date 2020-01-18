@@ -1,0 +1,110 @@
+﻿@using ESC.Persistencia
+@model ESC.Models.EmpresaDadoBancario
+
+@{
+    List<string> ListaTipoConta = TipoContaDados.Listar();
+
+    ViewBag.Title = "Criar";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+        <!-- INICIO ########## CABEÇALHO DA PÁGINA ########## -->
+    <div class="br-pagetitle">
+        <i class="icon ion-ios-home-outline"></i>
+        <div>
+            <h4>Dados Bancários</h4>
+            <p class="mg-b-0">Preencha os dados cadastrais</p>
+        </div>
+    </div>
+    <!-- FIM ########## CABEÇALHO DA PÁGINA ########## -->
+
+    <!-- INICIO ########## CORPO DA PÁGINA ########## -->
+
+    <div class="br-pagebody">
+        <div class="br-section-wrapper">
+            <div class="form-layout form-layout-4">
+
+                <div style="display:none">
+                    <div class="col-sm-2 mg-t-5 mg-sm-t-0">
+                        @Html.EditorFor(model => model.IdDadoBancario, new { htmlAttributes = new { @class = "form-control display:none", autocomplete = "off" } })
+                    </div>
+                </div><!-- row -->
+
+
+                <div class="row">
+                    @Html.LabelFor(model => model.NumBanco, htmlAttributes: new { @class = "col-sm-2 form-control-label" })
+                    <div class="col-sm-2 mg-t-5 mg-sm-t-0">
+                        @Html.EditorFor(model => model.NumBanco, new { htmlAttributes = new { @class = "form-control", autocomplete = "off" } })
+                        @Html.ValidationMessageFor(model => model.NumBanco, "", new { @class = "text-danger" })
+                    </div>
+                </div><!-- row -->
+
+                <div class="row mg-t-20">
+                    @Html.LabelFor(model => model.NomeBanco, htmlAttributes: new { @class = "col-sm-2 form-control-label" })
+                    <div class="col-sm-5 mg-t-5 mg-sm-t-0">
+                        @Html.EditorFor(model => model.NomeBanco, new { htmlAttributes = new { @class = "form-control", autocomplete = "off" } })
+                        @Html.ValidationMessageFor(model => model.NomeBanco, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="row mg-t-20">
+                    @Html.LabelFor(model => model.NumAgencia, htmlAttributes: new { @class = "col-sm-2 form-control-label" })
+                    <div class="col-sm-3 mg-t-5 mg-sm-t-0">
+                        @Html.EditorFor(model => model.NumAgencia, new { htmlAttributes = new { @class = "form-control", autocomplete = "off" } })
+                        @Html.ValidationMessageFor(model => model.NumAgencia, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="row mg-t-20">
+                    @Html.LabelFor(model => model.NumConta, htmlAttributes: new { @class = "col-sm-2 form-control-label" })
+                    <div class="col-sm-3 mg-t-10 mg-sm-t-0">
+                        @Html.EditorFor(model => model.NumConta, new { htmlAttributes = new { @class = "form-control", autocomplete = "off" } })
+                        @Html.ValidationMessageFor(model => model.NumConta, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="row mg-t-20">
+                    @Html.LabelFor(model => model.TipoConta.DescTipoConta, htmlAttributes: new { @class = "col-sm-2 form-control-label" })
+                    <div class="col-sm-3 mg-t-10 mg-sm-t-0">
+                        @Html.DropDownListFor(model => model.TipoConta.DescTipoConta, new MultiSelectList(ListaTipoConta), htmlAttributes: new { @class = "form-control show-tick control-dropbox", id = "idListaTipoConta", Title = "Selecione..." })
+                        @Html.ValidationMessageFor(model => model.TipoConta.DescTipoConta, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="row mg-t-20">
+
+                    <div class="col-lg-3 mg-t-20 mg-lg-t-0">
+                        <label class="ckbox">
+                            @if (Model.Ativo == true)
+                            {
+                                <input type="checkbox" name="status" checked><span>Ativa</span>
+                            }
+                            else
+                            {
+                                <input type="checkbox" name="status"><span>Ativa</span>
+                            }
+                        </label>
+                    </div><!-- col-3 -->
+
+                </div>
+
+                <br />
+                <div class="d-flex align-items-center justify-content-center bg-white-100 ht-md-80 bd pd-x-20">
+                    <div class="d-md-flex pd-y-20 pd-md-y-0">
+                        <span>
+                            <input type="submit" value="Gravar" class="btn btn-info pd-y-13 pd-x-20 bd-0 mg-md-l-10 mg-t-10 mg-md-t-0 tx-uppercase tx-11 tx-spacing-2" />
+                        </span>
+                        <span>
+                            @Html.ActionLink("Cancelar", "Index", "~/EmpresaDadoBancario", new { @class = "btn btn-secondary pd-y-13 pd-x-20 bd-0 mg-md-l-10 mg-t-10 mg-md-t-0 tx-uppercase tx-11 tx-spacing-2" })
+                        </span>
+                    </div>
+                </div><!-- form-layout-footer -->
+            </div><!-- form-layout -->
+            <!-- FIM ########## CORPO DA PÁGINA ########## -->
+        </div><!-- br-section-wrapper -->
+    </div><!-- br-pagebody -->
+}

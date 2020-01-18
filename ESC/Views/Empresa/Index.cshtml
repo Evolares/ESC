@@ -1,0 +1,61 @@
+﻿@model IEnumerable<ESC.Models.Empresa>
+
+@{
+    ViewBag.Title = "Cadastro de Empresa";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- INICIO ########## CABEÇALHO DA PÁGINA ########## -->
+<div class="br-pagetitle">
+    <i class="icon ion-ios-home-outline"></i>
+    <div>
+        <h4>Empresas Cadastradas</h4>
+        <p class="mg-b-0">Relação das Empresas Cadastradas no Sistemas.</p>
+
+    </div>
+</div>
+<!-- FIM ########## CABEÇALHO DA PÁGINA ########## -->
+<!-- INICIO ########## CORPO DA PÁGINA ########## -->
+<div class="br-pagebody">
+    <div class="br-section-wrapper">
+        <div class="table-wrapper">
+            <table class="table display responsive nowrap">
+                <thead>
+                    <tr>
+                        <th>Nome</th>
+                        <th>Nome Fantasia</th>
+                        <th>CNPJ</th>
+                        <th>Cidade</th>
+                        <th>UF</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model != null)
+                    {
+                        foreach (var item in Model)
+                        {
+                            <tr class="gradeX">
+                                <td>
+                                    @Html.ActionLink(item.Nome, "EditarEmpresa", new { idEmpresa = item.IdEmpresa })
+                                </td>
+                                <td>
+                                    @Html.ActionLink(item.NomeFantasia, "EditarEmpresa", new { idEmpresa = item.IdEmpresa })
+                                </td>
+                                <td>
+                                    @Html.ActionLink(item.CNPJ, "EditarEmpresa", new { idEmpresa = item.IdEmpresa })
+                                </td>
+                                <td>
+                                    @Html.ActionLink(item.Cidade, "EditarEmpresa", new { idEmpresa = item.IdEmpresa })
+                                </td>
+                                <td>
+                                    @Html.ActionLink(item.UF, "EditarEmpresa", new { idEmpresa = item.IdEmpresa })
+                                </td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div><!-- table-wrapper -->
+    </div><!-- br-section-wrapper -->
+</div><!-- br-pagebody -->
+
